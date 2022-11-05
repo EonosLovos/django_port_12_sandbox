@@ -1,0 +1,10 @@
+<p>{{ a_list | length }} </p>
+{% if a_list %}
+    <ul>
+    {% for q in a_list %}
+        <li><a href="/1/{{ q.id }}/">{{ q.name }}</a></li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No list is available.</p>
+{% endif %}
