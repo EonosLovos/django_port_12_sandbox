@@ -1,0 +1,31 @@
+[tool.poetry]
+name = "dj"
+version = "0.1.0"
+description = ""
+authors = ["EonosLovos <enlvenlvenlv@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.10"
+Django = "*"
+
+[tool.poetry.dev-dependencies]
+pytest = "*"
+pytest-asyncio = "*"
+pytest-django = "*"
+pytest-pythonpath = "*"
+pytest-watch = "*"
+django-filter = "*"
+pytest-mock = "*"
+#doc
+mkdocs = "*"
+mkdocs-markdownextradata-plugin = "*"
+mkdocs-material = "*"
+mkdocs-minify-plugin = "*"
+pymdown-extensions = "*"
+Markdown = "*"
+
+[build-system]
+requires = ["poetry-core", "setuptools"]
+build-backend = "poetry.core.masonry.api"
+
