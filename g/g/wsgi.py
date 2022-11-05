@@ -13,9 +13,4 @@ from django.core.wsgi import get_wsgi_application
 
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'g.settings')
 
-python_home = '/home/vagrant/.cache/pypoetry/virtualenvs/dj-vtp8n0h9-py3.10'
-
-activate_this = python_home + '/bin/activate_this.py'
-execfile(activate_this, dict(__file__=activate_this))
-
 application = get_wsgi_application()
