@@ -25,7 +25,11 @@ SECRET_KEY = 'django-insecure-sok$j#8rxh6r(!dt6il8l)z5*jwi+^nmr*nn*g5%82a%pfuv#!
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+'localhost',
+'127.0.0.1',
+'dj.cayonara.id.lv'
+]
 
 
 # Application definition
