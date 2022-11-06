@@ -1,6 +1,8 @@
 from django.shortcuts import render
 import os
 import pathlib
+import re
+from collections import Counter
 
 # Create your views here.
 from django.http import HttpResponse
@@ -15,20 +17,22 @@ def index(req):
         post_filepath = data.get("post_filepath")
         if(post_filepath.strip() != ""):
             file = post_filepath
-    errorText = ""        
+    errorText = ""
+    dict = Counter()
     p = pathlib.Path(file)
     if p.exists():
         file_with_path = p.resolve()
         if os.access(file_with_path, os.R_OK):
-            open(file_with_path, "r")#.write(my_data)
+            with open(file_with_path, "r") as fp:
+                for line in fp:
+                    dict.update(sorted(Counter(re.split('[\s\n,\.?!-:;\[\]]+', line)).items()))
+
         else:
             errorText=f"no access to file {file}!"
     else:
         errorText=f"file {file} not found"
         
-        
-    dict = []
-
+    
     view_model = {
 	'a_list': dict,
     'file':file,

@@ -16,7 +16,7 @@ Error: <pre>{{errorText}}</pre>
 {% if a_list %}
     <ul>
     {% for q in a_list %}
-        <li><a href="/1/{{ q.id }}/">{{ q.name }}</a></li>
+        <li><a href="/1/{{ q.id }}/">{{ q.0 }}({{ q.1 }})</a></li>
     {% endfor %}
     </ul>
 {% else %}
