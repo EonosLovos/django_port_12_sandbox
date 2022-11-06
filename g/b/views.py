@@ -87,7 +87,7 @@ def index_howtonamesame(req):
                 #col_e = rvl[4]
                 for i in ex_result.index:
                     try:
-                        email="zanete.darkale@cayonara.id.lv"
+                        to=""
                         msg = EmailMessage()
                         msg.set_content(template.replace("{{Event Name}}", ex_result[col_c][i]))
                         #template.format_map({"{Event Name}": "GOGOGOGOO"})
@@ -107,13 +107,15 @@ def index_howtonamesame(req):
                 
                 
                          #   TODO PASS OBJECT TO TEMPLATE SO THAT IT CAN FORMAT IT AS TEMPLATES DO>..
-                        errorText += "\n\n"+"Sending to "+email+"\n"  
+                        errorText += "\n\n"+"Sending to "+to+"\n"  
                         errorText += server.log
+                        server.log = ""
                         #from email.message import EmailMessage
                     except Exception as e:
-                        errorText += "\n\n"+"error Sending to "+email+"\n"  
+                        errorText += "\n\n"+"error Sending to "+to+"\n"  
                         errorText += server.log + "\n"
                         errorText += str(e)
+                        server.log = ""
                 
                 
                 server.quit()

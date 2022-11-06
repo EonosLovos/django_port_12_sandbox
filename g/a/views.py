@@ -33,9 +33,9 @@ def index(req):
                 with open(file_with_path, "r") as fp:
                     for line in fp:
                         # print(dict)
-                        dict.update(Counter(re.split(r'\s*[\s,\.?!-:;\[\]]\s*', line)).items())
-                wordcloud = show_wordcloud(copy.deepcopy(dict))
+                        dict.update(Counter(re.split(r'''\s*[\s,\.?!'-:;'\[\]]+\s*''', line)).items())
                 dict = sorted(dict.items(), key=operator.itemgetter(1),reverse=True)
+                wordcloud = show_wordcloud(dict)
             else:
                 errorText=f"no access to file {file}!"
         else:
