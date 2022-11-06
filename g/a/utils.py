@@ -16,8 +16,8 @@ def show_wordcloud(data: Optional[Counter]) -> Optional[Image.Image]:
 	"""Convert matplotlib data to image."""
 	try:
 		wordcloud = WordCloud(
-			background_color="white",max_words=200,max_font_size=60,
-			scale=3,random_state=0,stopwords=stopwords)
+			background_color="white",max_words=400,max_font_size=400,
+			scale=3,width=1600, height=1200, random_state=0,stopwords=stopwords)
 		wordcloud.generate(str(data))
 		plt.imshow(wordcloud, interpolation="bilinear")
 		plt.axis("off")

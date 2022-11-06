@@ -17,14 +17,11 @@ Error: <pre>{{errorText}}</pre>
         <img src="{{ wordcloud }}">
     {% endif %}
 
-<p>{{ a_list | length }} </p>
 {% if a_list %}
     <ul>
     {% for q, n in a_list %}
         <li>{{ q.0 }}({{ n }})</li>
     {% endfor %}
     </ul>
-{% else %}
-    <p>No list is available.</p>
 {% endif %}
 

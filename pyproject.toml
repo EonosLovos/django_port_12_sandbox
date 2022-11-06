@@ -8,6 +8,14 @@ readme = "README.md"
 [tool.poetry.dependencies]
 python = "^3.10"
 Django = "*"
+wordcloud = "*"
+matplotlib = "*"
+pandas = "*"
+openpyxl = "*"
+mypy = "*"
+isort = "*"
+django-stubs = "*"
+django-stubs-ext = "*"
 
 [tool.poetry.dev-dependencies]
 pytest = "*"
