@@ -45,7 +45,7 @@ def index_howtonamesame(req):
     searchNoPunny  = ['Ā', 'ā', 'Č', 'č', 'Ē', 'ē', 'Ģ', 'ģ', 'Ī', 'ī', 'Ķ', 'ķ', 'Ļ', 'ļ', 'Ņ', 'ņ', 'Ō', 'ō', 'Ŗ', 'ŗ', 'Š', 'š', 'Ū', 'ū', 'Ž', 'ž' ]
     replaceNoPunny = ['A', 'a', 'C', 'c', 'E', 'e', 'G', 'g', 'I', 'i', 'K', 'k', 'L', 'l', 'N', 'n', 'O', 'o', 'R', 'r', 'S', 's', 'U', 'u', 'Z', 'z' ]
     
-    post_whomtosend_bcc = "";
+    whomtosend_bcc = "";
 
     errorText = ""
     
@@ -53,7 +53,7 @@ def index_howtonamesame(req):
         data = req.POST
         post_whomtosend_bcc = data.get("post_whomtosend_bcc")
         if(post_whomtosend_bcc.strip() != ""):
-            file = post_whomtosend_bcc
+            whomtosend_bcc = post_whomtosend_bcc
             
         ex_path = pathlib.Path(inputFileName)
         templ_path = pathlib.Path(templateFileName)
@@ -92,18 +92,26 @@ def index_howtonamesame(req):
                         msg.set_content(template.replace("{{Event Name}}", ex_result[col_c][i]))
                         #template.format_map({"{Event Name}": "GOGOGOGOO"})
                         msg['Subject'] = 'Hi from ' + ex_result[col_c][i]
-                        msg['To'] = re.sub(config["regex_FindNameSurname"], config["regex_ReplaceNameSurname"],  ex_result[col_b][i])
-                        msg['Bcc'] = "zanete.darkale@gmail.com"
+                        to = re.sub(config["regex_FindNameSurname"], config["regex_ReplaceNameSurname"],  ex_result[col_b][i])
+                        punny_dic = {}
+                        for i in range(len(searchNoPunny)):
+                            punny_dic[searchNoPunny[i]] = replaceNoPunny[i]
+                        for c in punny_dic.keys():
+                            to = to.replace(c, punny_dic[c])
+                        msg['To'] = to
+                        if(whomtosend_bcc!=""):
+                            msg['Bcc'] = whomtosend_bcc
+                            #"zanete.darkale@gmail.com"
                         msg['From'] = from_address
                         server.send_message(msg)
                 
                 
                          #   TODO PASS OBJECT TO TEMPLATE SO THAT IT CAN FORMAT IT AS TEMPLATES DO>..
-                        errorText += "Sending to "+email+"\n"  
+                        errorText += "\n\n"+"Sending to "+email+"\n"  
                         errorText += server.log
                         #from email.message import EmailMessage
                     except Exception as e:
-                        errorText += "error Sending to "+email+"\n"  
+                        errorText += "\n\n"+"error Sending to "+email+"\n"  
                         errorText += server.log + "\n"
                         errorText += str(e)
                 
@@ -112,7 +120,7 @@ def index_howtonamesame(req):
             
 
     view_model = {
-    'post_whomtosend_bcc':post_whomtosend_bcc,
+    'post_whomtosend_bcc':whomtosend_bcc,
     'errorText': errorText
     }
     return render(req, 'index_howtonamesame.html', view_model)
