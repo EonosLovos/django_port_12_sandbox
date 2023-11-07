@@ -22,4 +22,6 @@ urlpatterns = [
     path('1/', av.index, name='wordCountApp'),
 	path('2/', bv.index_howtonamesame, name='emailApp'),
     path('admin/', admin.site.urls),
+    #path('1/a.txt', redirect(to="/static/e.txt"))
+    path('t/<str:file_name>/', av.view_text, name='viewText'),
 ]
